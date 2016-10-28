@@ -1,0 +1,16 @@
+{
+    "name": "tonik/gin",
+    "description": "WordPress starter theme.",
+    "keywords": ["tonik", "gin", "wordpress"],
+    "license": "GPL-2.0+",
+    "type": "wordpress-plugin",
+    "require": {
+        "php": ">=5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Tonik\\Gin\\": "src/Gin/"
+        }
+    },
+    "minimum-stability": "dev"
+}
