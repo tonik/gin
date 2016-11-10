@@ -2,6 +2,7 @@
 
 namespace Tonik\Gin\Asset;
 
+use Tonik\Gin\Foundation\Config;
 use Tonik\Gin\Foundation\Exception\FileNotFoundException;
 use Tonik\Gin\Foundation\Theme;
 
@@ -24,9 +25,9 @@ class Asset
     /**
      * Construct asset.
      *
-     * @param array $config
+     * @param \Tonik\Gin\Foundation\Config $config
      */
-    public function __construct(array $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
     }
@@ -38,11 +39,11 @@ class Asset
      */
     public function getUri()
     {
-        if ( ! $this->fileExists($file = $this->getPublicPath($this->file))) {
-            throw new FileNotFoundException("Asset file [$file] cannot be located.");
+        if ($this->fileExists($file = $this->getPublicPath($this->file))) {
+            return $this->getPublicUri($this->file);
         }
 
-        return $this->getPublicUri($this->file);
+        throw new FileNotFoundException("Asset file [$file] cannot be located.");
     }
 
     /**

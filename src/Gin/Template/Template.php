@@ -2,6 +2,7 @@
 
 namespace Tonik\Gin\Template;
 
+use Tonik\Gin\Foundation\Config;
 use Tonik\Gin\Foundation\Exception\FileNotFoundException;
 use Tonik\Gin\Foundation\Theme;
 
@@ -24,9 +25,9 @@ class Template
     /**
      * Construct template.
      *
-     * @param array $config
+     * @param \Tonik\Gin\Foundation\Config $config
      */
-    public function __construct(array $config)
+    public function __construct(Config $config)
     {
         $this->config = $config;
     }
@@ -41,14 +42,14 @@ class Template
      */
     public function render(array $context = [])
     {
-        if ($template = locate_template($this->getRelativePath(), false, false)) {
+        if (locate_template($this->getRelativePath(), false, false)) {
             $this->setContext($context);
             $this->doActions();
 
             return locate_template($this->getRelativePath(), true, false);
         }
 
-        throw new FileNotFoundException("Template file [{$template}] cannot be located.");
+        throw new FileNotFoundException("Template file [{$this->getRelativePath()}] cannot be located.");
     }
 
     /**
