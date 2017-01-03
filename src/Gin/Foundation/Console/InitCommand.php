@@ -180,7 +180,7 @@ class InitCommand extends Command
      */
     private function findAndReplaceInDir($where, $search, $replace)
     {
-        exec("find {$where} -type f \( -name  \*.php -o -name \*.css \) -exec \
+        exec("find {$where} -type f \( -name \*.php -o -name \*.css -o -name \*.json \) -exec \
             sed -i '' 's/{$search}/{$replace}/g' {} +");
     }
 
