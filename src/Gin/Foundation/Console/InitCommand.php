@@ -162,8 +162,14 @@ class InitCommand extends Command
      */
     protected function rename()
     {
+        setlocale(LC_CTYPE, "en_US.UTF-8");
+
         foreach ($this->answers as $key => $answer) {
-            $this->findAndReplaceInDir('./', "{{ {$key} }}", $answer);
+            $this->findAndReplaceInDir(
+                './',
+                "{{ {$key} }}",
+                escapeshellcmd($answer)
+            );
         }
 
         $this->getOutput()->writeln('<fg=green>Theme successufully initialized. Cheers!</>');
