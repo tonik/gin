@@ -1,6 +1,6 @@
 <?php
 
-namespace Tonik\Gin\Foundation\Console;
+namespace Tonik\Gin\Foundation\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
@@ -9,7 +9,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
 
-class InitCommand extends Command
+class ShakeCommand extends Command
 {
     /**
      * List of theme details entries.
@@ -55,8 +55,8 @@ class InitCommand extends Command
      */
     protected function configure()
     {
-        $this->setName('theme:init')
-            ->setDescription('Initializes starter theme.');
+        $this->setName('tonik:shake')
+            ->setDescription('Starts setup wizard guide, which initializes starter theme.');
     }
 
     /**
