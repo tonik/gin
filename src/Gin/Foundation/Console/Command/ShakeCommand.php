@@ -17,14 +17,14 @@ class ShakeCommand extends Command
      * @var array
      */
     protected $questions = [
-        'theme.name' => 'Enter theme name: ',
-        'theme.url' => 'Enter theme url: ',
-        'theme.description' => 'Enter theme description: ',
-        'theme.version' => 'Enter theme version: ',
-        'theme.author' => 'Enter theme author: ',
-        'theme.uri' => 'Enter theme uri: ',
-        'theme.textdomain' => 'Enter theme textdomain: ',
-        'theme.namespace' => 'Enter theme namespace: ',
+        'theme.name' => 'Theme Name [theme.name]',
+        'theme.uri' => 'Theme URI [theme.uri]',
+        'theme.description' => 'Theme Description [theme.description]',
+        'theme.version' => 'Theme Version [theme.version]',
+        'theme.author' => 'Author [theme.author]',
+        'theme.author.uri' => 'Author URI [theme.uri]',
+        'theme.textdomain' => 'Theme Textdomain [theme.textdomain]',
+        'theme.namespace' => 'Theme Namespace [theme.namespace]',
     ];
 
     /**
@@ -75,6 +75,8 @@ class ShakeCommand extends Command
         $this->askQuestions();
 
         if ($this->askForConfirmation()) {
+            $output->writeln('<info>Initializing theme ...</info>');
+
             $this->rename();
 
             return;
@@ -110,12 +112,12 @@ class ShakeCommand extends Command
      */
     public function askForDetail($key, $value)
     {
-        $question = new Question("<fg=yellow>{$value}</>");
+        $question = new Question("<question>{$value}:</question> ");
 
         $question->setValidator(function ($answer) {
             $value = trim($answer);
 
-            if ( ! empty($value)) {
+            if (! empty($value)) {
                 return $value;
             }
 
