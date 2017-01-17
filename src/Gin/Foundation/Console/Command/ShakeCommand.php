@@ -114,11 +114,13 @@ class ShakeCommand extends Command
     {
         $question = new Question("<question>{$value}:</question> ");
 
-        $question->setValidator(function ($answer) {
-            $value = trim($answer);
+        $question->setNormalizer(function ($value) {
+            return trim($value);
+        });
 
-            if (! empty($value)) {
-                return $value;
+        $question->setValidator(function ($answer) {
+            if (! empty($answer)) {
+                return $answer;
             }
 
             throw new RuntimeException('You have to answer to this question.');
