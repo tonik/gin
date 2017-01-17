@@ -4,10 +4,12 @@ namespace Tonik\Gin\Foundation\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Exception\RuntimeException;
+use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\ChoiceQuestion;
 use Symfony\Component\Console\Question\Question;
+use Symfony\Component\Finder\Finder;
 
 class ShakeCommand extends Command
 {
@@ -17,14 +19,26 @@ class ShakeCommand extends Command
      * @var array
      */
     protected $questions = [
-        'theme.name' => 'Theme Name [theme.name]',
-        'theme.uri' => 'Theme URI [theme.uri]',
-        'theme.description' => 'Theme Description [theme.description]',
-        'theme.version' => 'Theme Version [theme.version]',
-        'theme.author' => 'Author [theme.author]',
-        'theme.author.uri' => 'Author URI [theme.uri]',
-        'theme.textdomain' => 'Theme Textdomain [theme.textdomain]',
-        'theme.namespace' => 'Theme Namespace [theme.namespace]',
+        'theme.name' => '<comment>Theme Name</comment> [<info>theme.name</info>]',
+        'theme.uri' => '<comment>Theme URI</comment> [<info>theme.uri</info>]',
+        'theme.description' => '<comment>Theme Description</comment> [<info>theme.description</info>]',
+        'theme.version' => '<comment>Theme Version</comment> [<info>theme.version</info>]',
+        'theme.author' => '<comment>Author</comment> [<info>theme.author</info>]',
+        'theme.author.uri' => '<comment>Author URI</comment> [<info>theme.author.uri</info>]',
+        'theme.textdomain' => '<comment>Theme Textdomain</comment> [<info>theme.textdomain</info>]',
+        'theme.namespace' => '<comment>Theme Namespace</comment> [<info>theme.namespace</info>]',
+    ];
+
+    protected $ignore = [
+        "node_modules",
+        "vendor"
+    ];
+
+    protected $files = [
+        "/index.php",
+        "/404.php",
+        "/composer.json",
+        "/style.css"
     ];
 
     /**
@@ -75,8 +89,6 @@ class ShakeCommand extends Command
         $this->askQuestions();
 
         if ($this->askForConfirmation()) {
-            $output->writeln('<info>Initializing theme ...</info>');
-
             $this->rename();
 
             return;
@@ -112,7 +124,7 @@ class ShakeCommand extends Command
      */
     public function askForDetail($key, $value)
     {
-        $question = new Question("<question>{$value}:</question> ");
+        $question = new Question("{$value}: ");
 
         $question->setNormalizer(function ($value) {
             return trim($value);
@@ -142,7 +154,7 @@ class ShakeCommand extends Command
     public function askForConfirmation()
     {
         $question = new ChoiceQuestion(
-            'Ready to start initialization procedure. Want to continue?',
+            'Ready to start initialization procedure. Changes will be irreversible, want to continue?',
             ['yes', 'no'],
             1
         );
@@ -166,17 +178,37 @@ class ShakeCommand extends Command
      */
     protected function rename()
     {
-        setlocale(LC_CTYPE, "en_US.UTF-8");
+        $finder = new Finder();
 
-        foreach ($this->answers as $key => $answer) {
-            $this->findAndReplaceInDir(
-                './',
-                "{{ {$key} }}",
-                escapeshellcmd($answer)
-            );
+        $finder->files()
+            ->name('*.php')
+            ->name('*.css')
+            ->name('*.json')
+            ->exclude($this->ignore)
+            ->in($this->getInput()->getOption('directory'));
+
+        $progress = new ProgressBar($this->getOutput(), count($finder));
+
+        $progress->setFormat("[%bar%] %current%/%max% files\n");
+
+        foreach ($finder as $file) {
+            foreach ($this->answers as $key => $answer) {
+                if ($file->getExtension() !== 'json') {
+                    $answer = stripslashes($answer);
+                }
+
+                file_put_contents(
+                    $file->getRealPath(),
+                    str_replace("{{ {$key} }}", $answer, $file->getContents())
+                );
+            }
+
+            $progress->advance();
         }
 
-        $this->getOutput()->writeln('<fg=green>Theme successufully initialized. Cheers!</>');
+        $progress->finish();
+
+        $this->getOutput()->writeln("<fg=green>Theme successufully initialized. Cheers!</>");
     }
 
     /**
