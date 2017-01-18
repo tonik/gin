@@ -7,8 +7,9 @@
     "require": {
         "php": ">=5.6"
     },
-    "require-dev": {
-        "symfony/console": "~2.3|~3.0"
+    "suggest": {
+        "symfony/console": "[Gin CLI] Required for the proper operation of Console component",
+        "symfony/finder": "[Gin CLI] Needed for `gin tonik:shake` command"
     },
     "autoload": {
         "psr-4": {

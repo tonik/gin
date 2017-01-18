@@ -3,6 +3,7 @@
 namespace Tonik\Gin\Foundation\Console;
 
 use Symfony\Component\Console\Application;
+use Symfony\Component\Console\Input\InputOption;
 
 class CLI
 {
@@ -37,9 +38,11 @@ class CLI
     /**
      * Construct CLI.
      */
-    function __construct()
+    function __construct($dir)
     {
         $this->app = new Application($this->banner);
+
+        $this->dir = $dir;
 
         $this->bootstrap();
     }
@@ -63,8 +66,18 @@ class CLI
      */
     protected function addCommands(array $commands)
     {
-        foreach ($commands as $command) {
-            $this->app->add(new $command);
+        foreach ($commands as $name) {
+            $command = new $name;
+
+            $command->addOption(
+                'directory',
+                'dir',
+                InputOption::VALUE_REQUIRED,
+                'Root directory path of theme.',
+                $this->dir
+            );
+
+            $this->app->add($command);
         }
     }
 }
