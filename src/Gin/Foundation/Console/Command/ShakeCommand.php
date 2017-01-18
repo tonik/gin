@@ -29,16 +29,14 @@ class ShakeCommand extends Command
         'theme.namespace' => '<comment>Theme Namespace</comment> [<info>theme.namespace</info>]',
     ];
 
+    /**
+     * Directories to ignore on files finding.
+     *
+     * @var array
+     */
     protected $ignore = [
         "node_modules",
         "vendor"
-    ];
-
-    protected $files = [
-        "/index.php",
-        "/404.php",
-        "/composer.json",
-        "/style.css"
     ];
 
     /**
