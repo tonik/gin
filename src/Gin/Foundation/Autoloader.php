@@ -38,6 +38,8 @@ class Autoloader
                 throw new FileNotFoundException("Autoloaded file [{$this->getPath($file)}] cannot be found. Please, check your autoloaded entries in `config/theme.php` file.");
             }
         }
+
+        return true;
     }
 
     /**
