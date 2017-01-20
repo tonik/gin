@@ -95,6 +95,16 @@ class Asset
     }
 
     /**
+     * Gets the Asset file.
+     *
+     * @return string
+     */
+    public function getFile()
+    {
+        return $this->file;
+    }
+
+    /**
      * Sets the Asset file.
      *
      * @param string $file the file
