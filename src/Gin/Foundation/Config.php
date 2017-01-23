@@ -34,7 +34,7 @@ class Config implements ArrayAccess
      */
     public function has($key)
     {
-        return Arr::has($this->items, $key);
+        return isset($this->items[$key]);
     }
 
     /**
@@ -69,40 +69,6 @@ class Config implements ArrayAccess
         foreach ($keys as $key => $value) {
             $this->items[$key] = $value;
         }
-    }
-
-    /**
-     * Prepend a value onto an array configuration value.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
-     */
-    public function prepend($key, $value)
-    {
-        $array = $this->get($key);
-
-        array_unshift($array, $value);
-
-        $this->set($key, $array);
-    }
-
-    /**
-     * Push a value onto an array configuration value.
-     *
-     * @param  string  $key
-     * @param  mixed  $value
-     *
-     * @return void
-     */
-    public function push($key, $value)
-    {
-        $array = $this->get($key);
-
-        $array[] = $value;
-
-        $this->set($key, $array);
     }
 
     /**
