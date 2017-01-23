@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8f79cdd7877c01a79aa1b5bc85c958d4",
-    "content-hash": "88b4c54d697755631b771616d8c98c8f",
+    "hash": "27bfbe9aa70fe620744510e87ce43071",
+    "content-hash": "7f12a2a2147edbe3a1d7af5ce55a4768",
     "packages": [],
     "packages-dev": [
         {
@@ -116,12 +116,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/doctrine/instantiator.git",
-                "reference": "416fb8ad1d095a87f1d21bc40711843cd122fd4a"
+                "reference": "68099b02b60bbf3b088ff5cb67bf506770ef9cac"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/416fb8ad1d095a87f1d21bc40711843cd122fd4a",
-                "reference": "416fb8ad1d095a87f1d21bc40711843cd122fd4a",
+                "url": "https://api.github.com/repos/doctrine/instantiator/zipball/68099b02b60bbf3b088ff5cb67bf506770ef9cac",
+                "reference": "68099b02b60bbf3b088ff5cb67bf506770ef9cac",
                 "shasum": ""
             },
             "require": {
@@ -162,7 +162,7 @@
                 "constructor",
                 "instantiate"
             ],
-            "time": "2016-03-31 10:24:22"
+            "time": "2017-01-23 09:23:06"
         },
         {
             "name": "guzzle/guzzle",
@@ -266,12 +266,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/hamcrest/hamcrest-php.git",
-                "reference": "b7a5e18824117d8b65942e9aa77425d9b7dd7ff8"
+                "reference": "7cc81731d43f01090c3ad71adf1749e353632a79"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/b7a5e18824117d8b65942e9aa77425d9b7dd7ff8",
-                "reference": "b7a5e18824117d8b65942e9aa77425d9b7dd7ff8",
+                "url": "https://api.github.com/repos/hamcrest/hamcrest-php/zipball/7cc81731d43f01090c3ad71adf1749e353632a79",
+                "reference": "7cc81731d43f01090c3ad71adf1749e353632a79",
                 "shasum": ""
             },
             "require": {
@@ -306,7 +306,7 @@
             "keywords": [
                 "test"
             ],
-            "time": "2016-07-22 14:03:17"
+            "time": "2017-01-23 09:25:21"
         },
         {
             "name": "mockery/mockery",
@@ -314,12 +314,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/padraic/mockery.git",
-                "reference": "897c2e7807a49cec7da9395827df17168232cfe0"
+                "reference": "1c99815b8736679147219a014e0cc9968d33cb71"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/padraic/mockery/zipball/897c2e7807a49cec7da9395827df17168232cfe0",
-                "reference": "897c2e7807a49cec7da9395827df17168232cfe0",
+                "url": "https://api.github.com/repos/padraic/mockery/zipball/1c99815b8736679147219a014e0cc9968d33cb71",
+                "reference": "1c99815b8736679147219a014e0cc9968d33cb71",
                 "shasum": ""
             },
             "require": {
@@ -371,7 +371,7 @@
                 "test double",
                 "testing"
             ],
-            "time": "2017-01-18 20:31:44"
+            "time": "2017-01-23 08:47:49"
         },
         {
             "name": "myclabs/deep-copy",
@@ -1043,12 +1043,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "9e117fce6fec5d3a5ec54d1e4dd4aafcc275ea37"
+                "reference": "6b8eb01e8b70dcf15be839efa5063ab91fbb30ee"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/9e117fce6fec5d3a5ec54d1e4dd4aafcc275ea37",
-                "reference": "9e117fce6fec5d3a5ec54d1e4dd4aafcc275ea37",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6b8eb01e8b70dcf15be839efa5063ab91fbb30ee",
+                "reference": "6b8eb01e8b70dcf15be839efa5063ab91fbb30ee",
                 "shasum": ""
             },
             "require": {
@@ -1110,7 +1110,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2017-01-19 14:28:19"
+            "time": "2017-01-22 17:34:32"
         },
         {
             "name": "phpunit/phpunit-mock-objects",
@@ -1848,12 +1848,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "08efa49aa07dde0747198c6075a1061c750e9884"
+                "reference": "4272e242823935c74c4090aa9b60bcf0d42f2a2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/08efa49aa07dde0747198c6075a1061c750e9884",
-                "reference": "08efa49aa07dde0747198c6075a1061c750e9884",
+                "url": "https://api.github.com/repos/symfony/console/zipball/4272e242823935c74c4090aa9b60bcf0d42f2a2e",
+                "reference": "4272e242823935c74c4090aa9b60bcf0d42f2a2e",
                 "shasum": ""
             },
             "require": {
@@ -1905,7 +1905,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-11 12:05:48"
+            "time": "2017-01-21 17:19:16"
         },
         {
             "name": "symfony/debug",
@@ -1913,12 +1913,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "88d66d1f16dd99bd0ba0712a941b7207d07e62cd"
+                "reference": "8dfba97c33692aef9b0f85d9b38a73972bfd7b77"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/88d66d1f16dd99bd0ba0712a941b7207d07e62cd",
-                "reference": "88d66d1f16dd99bd0ba0712a941b7207d07e62cd",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/8dfba97c33692aef9b0f85d9b38a73972bfd7b77",
+                "reference": "8dfba97c33692aef9b0f85d9b38a73972bfd7b77",
                 "shasum": ""
             },
             "require": {
@@ -1929,7 +1929,6 @@
                 "symfony/http-kernel": ">=2.3,<2.3.24|~2.4.0|>=2.5,<2.5.9|>=2.6,<2.6.2"
             },
             "require-dev": {
-                "symfony/class-loader": "~2.8|~3.0",
                 "symfony/http-kernel": "~2.8|~3.0"
             },
             "type": "library",
@@ -1962,7 +1961,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-15 16:05:29"
+            "time": "2017-01-23 08:28:52"
         },
         {
             "name": "symfony/event-dispatcher",
@@ -2236,12 +2235,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/yaml.git",
-                "reference": "a7be1238e556929b5a07aa8188d938078e467fab"
+                "reference": "7928849b226f065dae93ec0e8be3b829f73ba67b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/yaml/zipball/a7be1238e556929b5a07aa8188d938078e467fab",
-                "reference": "a7be1238e556929b5a07aa8188d938078e467fab",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/7928849b226f065dae93ec0e8be3b829f73ba67b",
+                "reference": "7928849b226f065dae93ec0e8be3b829f73ba67b",
                 "shasum": ""
             },
             "require": {
@@ -2283,7 +2282,50 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2017-01-09 14:37:34"
+            "time": "2017-01-21 17:10:26"
+        },
+        {
+            "name": "tonik/cli",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tonik/cli.git",
+                "reference": "4fb4cfc14b82a8121c099209b08dd0c1681c80eb"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tonik/cli/zipball/4fb4cfc14b82a8121c099209b08dd0c1681c80eb",
+                "reference": "4fb4cfc14b82a8121c099209b08dd0c1681c80eb",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.6",
+                "symfony/console": "~2.3|~3.0",
+                "symfony/finder": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "~1.0.0",
+                "phpunit/phpunit": "~5.3.0",
+                "satooshi/php-coveralls": "~1.0.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Tonik\\CLI\\": "src/CLI/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "description": "CLI for tonik/gin WordPress Starter Theme.",
+            "keywords": [
+                "cli",
+                "gin",
+                "tonik",
+                "wordpress"
+            ],
+            "time": "2017-01-23 11:21:13"
         },
         {
             "name": "webmozart/assert",
@@ -2338,7 +2380,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "tonik/cli": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
