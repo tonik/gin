@@ -1,0 +1,1 @@
+[![Build Status](https://travis-ci.org/tonik/gin.svg?branch=master)](https://travis-ci.org/tonik/gin) [![Coverage Status](https://coveralls.io/repos/github/tonik/gin/badge.svg?branch=1.2.0)](https://coveralls.io/github/tonik/gin?branch=1.2.0)
