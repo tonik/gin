@@ -33,13 +33,25 @@ class Autoloader
      */
     public function register()
     {
+        do_action('Tonik\Gin\Foundation\Autoloader\before_load');
+
+        $this->load();
+
+        do_action('Tonik\Gin\Foundation\Autoloader\after_load');
+    }
+
+    /**
+     * Localize and autoloads files.
+     *
+     * @return void
+     */
+    public function load()
+    {
         foreach ($this->config['autoload'] as $file) {
             if ( ! locate_template($this->getRelativePath($file), true, true)) {
                 throw new FileNotFoundException("Autoloaded file [{$this->getPath($file)}] cannot be found. Please, check your autoloaded entries in `config/theme.php` file.");
             }
         }
-
-        return true;
     }
 
     /**

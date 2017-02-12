@@ -1,6 +1,7 @@
 <?php
 
 use Brain\Monkey\Functions;
+use Brain\Monkey\WP\Actions;
 use Tonik\Gin\Foundation\Autoloader;
 use Tonik\Gin\Foundation\Config;
 use Tonik\Gin\Foundation\Exception\FileNotFoundException;
@@ -79,6 +80,9 @@ class AutoloaderTest extends TestCase
         $config = $this->getConfig();
         $autoloader = $this->getAutoloader($config);
 
+        Actions::expectFired('Tonik\Gin\Foundation\Autoloader\before_load')->once();
+        Actions::expectFired('Tonik\Gin\Foundation\Autoloader\after_load')->once();
+
         Functions::expect('locate_template')
             ->once()
             ->with('src/file/to/load.php', true, true)
@@ -96,7 +100,7 @@ class AutoloaderTest extends TestCase
             ->with('autoload')
             ->andReturn(['file/to/load.php']);
 
-        $this->assertEquals($autoloader->register(), true);
+        $autoloader->register();
     }
 
     public function getConfig()
