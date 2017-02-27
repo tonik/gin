@@ -30,11 +30,16 @@ class Theme extends Singleton
      * Resolve value from theme registry.
      *
      * @param  string $key
+     * @param  array $parameters
      *
      * @return mixed
      */
-    public function get($key)
+    public function get($key, $parameters = [])
     {
+        if (is_callable($callable = $this->registry[$key])) {
+            return call_user_func_array($callable, $parameters);
+        }
+
         return $this->registry[$key];
     }
 }
