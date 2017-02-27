@@ -2,6 +2,8 @@
 
 namespace Tonik\Gin\Foundation;
 
+use Tonik\Gin\Foundation\Exception\BindingResolutionException;
+
 class Theme extends Singleton
 {
     /**
@@ -36,10 +38,18 @@ class Theme extends Singleton
      */
     public function get($key, $parameters = [])
     {
-        if (is_callable($callable = $this->registry[$key])) {
-            return call_user_func_array($callable, $parameters);
+        if (! isset($this->registry[$key])) {
+            throw new BindingResolutionException("Unresolvable resolution. The [{$key}] binding is not registered.");
         }
 
-        return $this->registry[$key];
+        if (is_callable($abstract = $this->registry[$key])) {
+            if (is_array($parameters)) {
+                return call_user_func_array($abstract, $parameters);
+            }
+
+            return call_user_func($abstract, $parameters);
+        }
+
+        return $abstract;
     }
 }
