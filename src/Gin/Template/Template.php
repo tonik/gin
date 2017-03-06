@@ -105,7 +105,9 @@ class Template
     {
         $templates = $this->config['directories']['templates'];
 
-        return $templates . DIRECTORY_SEPARATOR . $this->getFilename();
+        $extension = $this->config['templates']['extension'];
+
+        return $templates . DIRECTORY_SEPARATOR . $this->getFilename($extension);
     }
 
     /**
