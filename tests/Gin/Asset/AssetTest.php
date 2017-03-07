@@ -33,10 +33,6 @@ class AssetTest extends TestCase
         $config = $this->getConfig();
         $asset = $this->getAsset($config, 'js/sample-asset.js');
 
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['public' => 'public']);
-
         $this->assertEquals($asset->getRelativePath(), 'public/js/sample-asset.js');
     }
 
@@ -48,14 +44,6 @@ class AssetTest extends TestCase
         $config = $this->getConfig();
         $asset = $this->getAsset($config, 'js/sample-asset.js');
 
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn(['directory' => 'abs/path']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['public' => 'public']);
-
         $this->assertEquals($asset->getPublicPath(), 'abs/path/public/js/sample-asset.js');
     }
 
@@ -66,14 +54,6 @@ class AssetTest extends TestCase
     {
         $config = $this->getConfig();
         $asset = $this->getAsset($config, 'js/sample-asset.js');
-
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn(['uri' => 'uri/path']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['public' => 'public']);
 
         $this->assertEquals($asset->getPublicUri(), 'uri/path/public/js/sample-asset.js');
     }
@@ -89,17 +69,6 @@ class AssetTest extends TestCase
         $exists = $this->getFunctionMock(__NAMESPACE__, "file_exists");
         $exists->expects($this->once())->willReturn(true);
 
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn([
-                'directory' => 'abs/path',
-                'uri' => 'uri/path'
-            ]);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['public' => 'public']);
-
         $this->assertEquals($asset->getUri(), 'uri/path/public/js/sample-asset.js');
     }
 
@@ -111,14 +80,6 @@ class AssetTest extends TestCase
         $config = $this->getConfig();
         $asset = $this->getAsset($config, 'js/sample-asset.js');
 
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn(['directory' => 'abs/path']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['public' => 'public']);
-
         $this->expectException(FileNotFoundException::class);
 
         $asset->getUri();
@@ -126,12 +87,14 @@ class AssetTest extends TestCase
 
     public function getConfig()
     {
-        return Mockery::mock(Config::class, [
+        return new Config([
             'paths' => [
                 'uri' => 'uri/path',
+                'directory' => 'abs/path',
             ],
             'directories' => [
-                'assets' => 'resources/assets'
+                'assets' => 'resources/assets',
+                'public' => 'public',
             ]
         ]);
     }
