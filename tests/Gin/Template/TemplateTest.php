@@ -27,15 +27,7 @@ class TemplateTest extends TestCase
         $config = $this->getConfig();
         $template = $this->getTemplate($config, 'sample-template');
 
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn(['directory' => 'abs/path']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['templates' => 'resources/templates']);
-
-        $this->assertEquals($template->getPath(), 'abs/path/resources/templates/sample-template.php');
+        $this->assertEquals($template->getPath(), 'abs/path/resources/templates/sample-template.tpl.php');
     }
 
     /**
@@ -46,11 +38,7 @@ class TemplateTest extends TestCase
         $config = $this->getConfig();
         $template = $this->getTemplate($config, 'sample-template');
 
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['templates' => 'resources/templates']);
-
-        $this->assertEquals($template->getRelativePath(), 'resources/templates/sample-template.php');
+        $this->assertEquals($template->getRelativePath(), 'resources/templates/sample-template.tpl.php');
     }
 
     /**
@@ -63,12 +51,8 @@ class TemplateTest extends TestCase
 
         Functions::expect('locate_template')
             ->once()
-            ->with('resources/templates/sample-template.php', false, false)
+            ->with('resources/templates/sample-template.tpl.php', false, false)
             ->andReturn(false);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['templates' => 'resources/templates']);
 
         $this->expectException(FileNotFoundException::class);
 
@@ -91,10 +75,6 @@ class TemplateTest extends TestCase
             ->once()
             ->with('sample-template', null);
 
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['templates' => 'resources/templates']);
-
         $template->render();
     }
 
@@ -113,10 +93,6 @@ class TemplateTest extends TestCase
         Actions::expectFired('get_template_part_sample-template')
             ->once()
             ->with('sample-template', 'named');
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['templates' => 'resources/templates']);
 
         $template->render();
     }
@@ -143,10 +119,6 @@ class TemplateTest extends TestCase
             ->with('key2', 'value2')
             ->andReturn(null);
 
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['templates' => 'resources/templates']);
-
         $template->render([
             'key1' => 'value1',
             'key2' => 'value2'
@@ -155,7 +127,10 @@ class TemplateTest extends TestCase
 
     public function getConfig()
     {
-        return Mockery::mock(Config::class, [
+        return new Config([
+            'templates' => [
+                'extension' => '.tpl.php'
+            ],
             'paths' => [
                 'directory' => 'abs/path',
             ],
