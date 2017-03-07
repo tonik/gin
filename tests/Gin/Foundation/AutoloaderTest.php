@@ -16,10 +16,6 @@ class AutoloaderTest extends TestCase
         $config = $this->getConfig();
         $autoloader = $this->getAutoloader($config);
 
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['src' => 'src']);
-
         $this->assertEquals($autoloader->getRelativePath('file/to/load.php'), 'src/file/to/load.php');
     }
 
@@ -30,14 +26,6 @@ class AutoloaderTest extends TestCase
     {
         $config = $this->getConfig();
         $autoloader = $this->getAutoloader($config);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['src' => 'src']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn(['directory' => 'abs/path']);
 
         $this->assertEquals($autoloader->getPath('file/to/load.php'), 'abs/path/src/file/to/load.php');
     }
@@ -56,18 +44,6 @@ class AutoloaderTest extends TestCase
             ->andReturn(false);
 
         $this->expectException(FileNotFoundException::class);
-
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['src' => 'src']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn(['directory' => 'abs/path']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('autoload')
-            ->andReturn(['file/to/load.php']);
 
         $autoloader->register();
     }
@@ -88,24 +64,12 @@ class AutoloaderTest extends TestCase
             ->with('src/file/to/load.php', true, true)
             ->andReturn(true);
 
-        $config->shouldReceive('offsetGet')
-            ->with('directories')
-            ->andReturn(['src' => 'src']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('paths')
-            ->andReturn(['directory' => 'abs/path']);
-
-        $config->shouldReceive('offsetGet')
-            ->with('autoload')
-            ->andReturn(['file/to/load.php']);
-
         $autoloader->register();
     }
 
     public function getConfig()
     {
-        return Mockery::mock(Config::class, [
+        return new Config([
             'paths' => [
                 'directory' => 'abs/path',
             ],
