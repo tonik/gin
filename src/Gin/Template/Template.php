@@ -81,6 +81,12 @@ class Template
             return;
         }
 
+        // Use first template name, if template
+        // file is an array, but is not named.
+        if (is_array($this->file) && isset($this->file[0])) {
+            return do_action("get_template_part_{$this->file[0]}", $this->file[0], null);
+        }
+
         do_action("get_template_part_{$this->file}", $this->file, null);
     }
 
@@ -123,7 +129,7 @@ class Template
 
         // Use first template name, if template
         // file is an array, but is not named.
-        if (is_array($this->file)) {
+        if (is_array($this->file) && isset($this->file[0])) {
             return "{$this->file[0]}{$extension}";
         }
 
