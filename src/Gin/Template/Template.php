@@ -115,8 +115,16 @@ class Template
      */
     public function getFilename($extension = '.php')
     {
+        // If template is named,
+        // return joined template names.
         if ($this->isNamed()) {
             return join('-', $this->file) . $extension;
+        }
+
+        // Use first template name, if template
+        // file is an array, but is not named.
+        if (is_array($this->file)) {
+            return "{$this->file[0]}{$extension}";
         }
 
         return "{$this->file}{$extension}";
@@ -129,7 +137,19 @@ class Template
      */
     public function isNamed()
     {
-        return is_array($this->file);
+        // If file is not array, then template
+        // is not named for sure.
+        if (! is_array($this->file)) {
+            return false;
+        }
+
+        // Return false if template is named,
+        // but name is bool or null.
+        if (isset($this->file[1]) && is_bool($this->file[1]) || is_null($this->file[1])) {
+            return false;
+        }
+
+        return true;
     }
 
     /**
