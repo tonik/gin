@@ -3,8 +3,8 @@
 use Brain\Monkey\Functions;
 use Brain\Monkey\WP\Actions;
 use Tonik\Gin\Foundation\Config;
-use Tonik\Gin\Foundation\Exception\FileNotFoundException;
 use Tonik\Gin\Template\Template;
+use Tonik\Gin\Foundation\Exception\FileNotFoundException;
 
 class TemplateTest extends TestCase
 {
