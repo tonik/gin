@@ -1,6 +1,6 @@
 {
     "name": "tonik/gin",
-    "description": "Simple CLI for initiating themes based on Tonik WordPress Starter Theme.",
+    "description": "Foundation of the Tonik WordPress Starter Theme. All the magic happens here.",
     "keywords": ["tonik", "gin", "wordpress"],
     "license": "MIT",
     "type": "wordpress-plugin",
