@@ -103,13 +103,8 @@ class TemplateTest extends TestCase
         $config = $this->getConfig();
         $template = $this->getTemplate($config, 'sample_template');
 
-        Functions::expect('locate_template')
-            ->twice()
-            ->andReturn(true);
-
-        Actions::expectFired('get_template_part_sample_template')
-            ->once()
-            ->with('sample_template', null);
+        Functions::expect('locate_template')->twice()->andReturn(true);
+        Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', null);
 
         $template->render();
     }
@@ -120,16 +115,20 @@ class TemplateTest extends TestCase
     public function it_should_do_get_template_part_action_on_render_with_named_template()
     {
         $config = $this->getConfig();
+
         $template = $this->getTemplate($config, ['sample_template', 'named']);
+        Functions::expect('locate_template')->twice()->andReturn(true);
+        Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', 'named');
+        $template->render();
 
-        Functions::expect('locate_template')
-            ->twice()
-            ->andReturn(true);
+        $template = $this->getTemplate($config, ['sample_template', false]);
+        Functions::expect('locate_template')->twice()->andReturn(true);
+        Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', false);
+        $template->render();
 
-        Actions::expectFired('get_template_part_sample_template')
-            ->once()
-            ->with('sample_template', 'named');
-
+        $template = $this->getTemplate($config, ['sample_template', null]);
+        Functions::expect('locate_template')->twice()->andReturn(true);
+        Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', null);
         $template->render();
     }
 
@@ -141,19 +140,9 @@ class TemplateTest extends TestCase
         $config = $this->getConfig();
         $template = $this->getTemplate($config, ['sample_template', 'named']);
 
-        Functions::expect('locate_template')
-            ->twice()
-            ->andReturn(true);
-
-        Functions::expect('set_query_var')
-            ->once()
-            ->with('key1', 'value1')
-            ->andReturn(null);
-
-        Functions::expect('set_query_var')
-            ->once()
-            ->with('key2', 'value2')
-            ->andReturn(null);
+        Functions::expect('locate_template')->twice()->andReturn(true);
+        Functions::expect('set_query_var')->once()->with('key1', 'value1')->andReturn(null);
+        Functions::expect('set_query_var')->once()->with('key2', 'value2')->andReturn(null);
 
         $template->render([
             'key1' => 'value1',
