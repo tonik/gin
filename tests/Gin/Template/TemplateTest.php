@@ -49,10 +49,7 @@ class TemplateTest extends TestCase
         $config = $this->getConfig();
         $template = $this->getTemplate($config, 'sample_template');
 
-        Functions::expect('locate_template')
-            ->once()
-            ->with('resources/templates/sample_template.tpl.php', false, false)
-            ->andReturn(false);
+        Functions::expect('locate_template')->once()->with('resources/templates/sample_template.tpl.php', false, false)->andReturn(false);
 
         $this->expectException(FileNotFoundException::class);
 
