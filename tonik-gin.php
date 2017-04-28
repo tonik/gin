@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: Tonik & Gin
-Plugin URI: http://gin.tonik.pl
+Plugin URI: http://tonik.pl
 Description: Foundation for Gin Starter Theme.
 Version: 0.1.0
 Author: Tonik

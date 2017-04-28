@@ -1,6 +1,6 @@
 {
     "name": "tonik/gin",
-    "description": "Foundation of the Tonik WordPress Starter Theme. All the magic happens here.",
+    "description": "Foundation of the Tonik WordPress Starter Theme. Provides all custom functionalities which it offers.",
     "keywords": ["tonik", "gin", "wordpress"],
     "license": "MIT",
     "type": "wordpress-plugin",
