@@ -1,4 +1,4 @@
-# Gin
+# Tonik — Gin
 
 [![Build Status](https://travis-ci.org/tonik/gin.svg?branch=master)](https://travis-ci.org/tonik/gin) [![Coverage Status](https://coveralls.io/repos/github/tonik/gin/badge.svg?branch=master)](https://coveralls.io/github/tonik/gin?branch=master)
 
