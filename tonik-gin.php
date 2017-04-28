@@ -1,10 +1,10 @@
 <?php
 
 /*
-Plugin Name: Tonik & Gin
+Plugin Name: tonik/gin
 Plugin URI: http://tonik.pl
-Description: Foundation for Gin Starter Theme.
-Version: 0.1.0
+Description: Foundation of the Tonik WordPress Starter Theme. Provides all custom functionalities which it offers.
+Version: 2.0.0-beta.2
 Author: Tonik
 Author URI: http://tonik.pl
 License: GPL-2.0+
