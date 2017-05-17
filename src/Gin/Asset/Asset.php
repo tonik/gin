@@ -39,8 +39,8 @@ class Asset
      */
     public function getUri()
     {
-        if ($this->fileExists($file = $this->getPublicPath($this->file))) {
-            return $this->getPublicUri($this->file);
+        if ($this->fileExists($file = $this->getPublicPath())) {
+            return $this->getPublicUri();
         }
 
         throw new FileNotFoundException("Asset file [$file] cannot be located.");
