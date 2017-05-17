@@ -89,14 +89,25 @@ class AssetTest extends TestCase
     /**
      * @test
      */
-    public function it_should_throw_on_file_if_no_asset_file()
+    public function it_should_throw_on_getting_file_uri_if_file_is_missing()
     {
         $config = $this->getConfig();
         $asset = $this->getAsset($config, 'js/example.js');
 
         $this->expectException(FileNotFoundException::class);
-
         $asset->getUri();
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_on_getting_file_path_if_file_is_missing()
+    {
+        $config = $this->getConfig();
+        $asset = $this->getAsset($config, 'js/example.js');
+
+        $this->expectException(FileNotFoundException::class);
+        $asset->getPath();
     }
 
     public function getConfig()
