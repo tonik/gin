@@ -11,7 +11,7 @@ class Asset
     /**
      * Theme config instance.
      *
-     * @var array
+     * @var \Tonik\Gin\Foundation\Config
      */
     protected $config;
 
@@ -33,7 +33,7 @@ class Asset
     }
 
     /**
-     * Get template file.
+     * Get asset file URI.
      *
      * @return string
      */
@@ -41,6 +41,20 @@ class Asset
     {
         if ($this->fileExists($file = $this->getPublicPath($this->file))) {
             return $this->getPublicUri($this->file);
+        }
+
+        throw new FileNotFoundException("Asset file [$file] cannot be located.");
+    }
+
+    /**
+     * Get asset file path.
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        if ($this->fileExists($file = $this->getPublicPath())) {
+            return $file;
         }
 
         throw new FileNotFoundException("Asset file [$file] cannot be located.");
