@@ -56,8 +56,8 @@ class AutoloaderTest extends TestCase
         $config = $this->getConfig();
         $autoloader = $this->getAutoloader($config);
 
-        Actions::expectFired('Tonik\Gin\Foundation\Autoloader\before_load')->once();
-        Actions::expectFired('Tonik\Gin\Foundation\Autoloader\after_load')->once();
+        Actions::expectFired('tonik/gin/autoloader/before_load')->once();
+        Actions::expectFired('tonik/gin/autoloader/after_load')->once();
 
         Functions::expect('locate_template')
             ->once()

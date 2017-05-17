@@ -33,11 +33,11 @@ class Autoloader
      */
     public function register()
     {
-        do_action('Tonik\Gin\Foundation\Autoloader\before_load');
+        do_action('tonik/gin/autoloader/before_load');
 
         $this->load();
 
-        do_action('Tonik\Gin\Foundation\Autoloader\after_load');
+        do_action('tonik/gin/autoloader/after_load');
     }
 
     /**
