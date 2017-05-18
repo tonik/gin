@@ -42,11 +42,11 @@ class Template
      */
     public function render(array $context = [])
     {
-        if (locate_template($this->getRelativePath(), false, false)) {
-            $this->setContext($context);
+        if (locate_template($path = $this->getRelativePath(), false, false)) {
+            $this->setContext(apply_filters("tonik/gin/template/context/{$this->getFilename()}", $context));
             $this->doActions();
 
-            return locate_template($this->getRelativePath(), true, false);
+            return locate_template($path, true, false);
         }
 
         throw new FileNotFoundException("Template file [{$this->getRelativePath()}] cannot be located.");
@@ -135,7 +135,7 @@ class Template
             return "{$this->file[0]}{$extension}";
         }
 
-        return "{$this->file}{$extension}";
+        return apply_filters('tonik/gin/template/filename', "{$this->file}{$extension}");
     }
 
     /**

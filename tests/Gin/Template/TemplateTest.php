@@ -2,9 +2,10 @@
 
 use Brain\Monkey\Functions;
 use Brain\Monkey\WP\Actions;
+use Brain\Monkey\WP\Filters;
 use Tonik\Gin\Foundation\Config;
-use Tonik\Gin\Template\Template;
 use Tonik\Gin\Foundation\Exception\FileNotFoundException;
+use Tonik\Gin\Template\Template;
 
 class TemplateTest extends TestCase
 {
@@ -39,6 +40,35 @@ class TemplateTest extends TestCase
         $template = $this->getTemplate($config, 'sample_template');
 
         $this->assertEquals($template->getRelativePath(), 'resources/templates/sample_template.tpl.php');
+    }
+
+    /**
+     * @test
+     */
+    public function test_filter_on_template_filename_getter()
+    {
+        $config = $this->getConfig();
+        $template = $this->getTemplate($config, 'sample_template');
+
+        Filters::expectApplied('tonik/gin/template/filename')->once()->with('sample_template.php')->andReturn('changed_template_name.php');
+
+        $this->assertEquals('changed_template_name.php', $template->getFilename());
+    }
+
+    /**
+     * @test
+     */
+    public function test_centext_filter_on_template_rendering()
+    {
+        $config = $this->getConfig();
+        $template = $this->getTemplate($config, 'sample_template');
+
+        Functions::expect('locate_template')->twice()->andReturn(true);
+        Functions::expect('set_query_var')->once()->with('key', 'changed')->andReturn(null);
+        Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', null);
+        Filters::expectApplied('tonik/gin/template/context/sample_template.php')->once()->with(['key' => 'value'])->andReturn(['key' => 'changed']);
+
+        $template->render(['key' => 'value']);
     }
 
     /**
