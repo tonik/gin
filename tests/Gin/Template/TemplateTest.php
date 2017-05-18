@@ -61,13 +61,18 @@ class TemplateTest extends TestCase
     public function test_centext_filter_on_template_rendering()
     {
         $config = $this->getConfig();
-        $template = $this->getTemplate($config, 'sample_template');
 
-        Functions::expect('locate_template')->twice()->andReturn(true);
-        Functions::expect('set_query_var')->once()->with('key', 'changed')->andReturn(null);
+        Functions::expect('locate_template')->atLeast()->once()->andReturn(true);
+        Functions::expect('set_query_var')->atLeast()->once()->with('key', 'changed')->andReturn(null);
+
+        $template = $this->getTemplate($config, 'sample_template');
         Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', null);
         Filters::expectApplied('tonik/gin/template/context/sample_template.php')->once()->with(['key' => 'value'])->andReturn(['key' => 'changed']);
+        $template->render(['key' => 'value']);
 
+        $template = $this->getTemplate($config, ['sample_template', 'named']);
+        Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', 'named');
+        Filters::expectApplied('tonik/gin/template/context/sample_template-named.php')->once()->with(['key' => 'value'])->andReturn(['key' => 'changed']);
         $template->render(['key' => 'value']);
     }
 
