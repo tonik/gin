@@ -23,6 +23,7 @@ class ThemeTest extends TestCase
 
         $theme->bind('key', function () { return 'value'; });
 
+        $this->assertTrue($theme->has('key'));
         $this->assertEquals($theme->get('key'), 'value');
     }
 
@@ -35,7 +36,49 @@ class ThemeTest extends TestCase
 
         $theme->bind('params', function ($theme, $params) { return $params; });
 
+        $this->assertTrue($theme->has('params'));
         $this->assertEquals(['name' => 'John'], $theme->get('params', ['name' => 'John']));
+    }
+
+    /**
+     * @test
+     */
+    public function test_array_services_getter_and_setter()
+    {
+        $theme = Theme::getInstance();
+
+        $theme['key'] = function () { return 'value'; };
+        $this->assertTrue(isset($theme['key']));
+        $this->assertEquals('value', $theme['key']);
+    }
+
+    /**
+     * @test
+     */
+    public function test_array_services_unsetting()
+    {
+        $theme = Theme::getInstance();
+
+        $this->expectException('Tonik\Gin\Foundation\Exception\BindingResolutionException');
+
+        $theme->factory('factory', function () { return 'value'; });
+        $theme['service'] = function () { return 'value'; };
+        unset($theme['service'], $theme['factory']);
+
+        $service = $theme['service'];
+        $factory = $theme['factory'];
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_throw_on_setting_non_callable_service_definition()
+    {
+        $theme = Theme::getInstance();
+
+        $this->expectException('Tonik\Gin\Foundation\Exception\BindingResolutionException');
+
+        $theme['key'] = 'value';
     }
 
     /**

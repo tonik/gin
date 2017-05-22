@@ -3,9 +3,10 @@
 namespace Tonik\Gin\Foundation;
 
 use Closure;
+use ArrayAccess;
 use Tonik\Gin\Foundation\Exception\BindingResolutionException;
 
-class Theme extends Singleton
+class Theme extends Singleton implements ArrayAccess
 {
     /**
      * Collection of services.
@@ -59,10 +60,22 @@ class Theme extends Singleton
     }
 
     /**
+     * Resolves service with parameters.
+     *
+     * @param  mixed $abstract
+     * @param  array $parameters
+     * @return mixed
+     */
+    protected function resolve($abstract, array $parameters)
+    {
+        return call_user_func_array($abstract, [$this, $parameters]);
+    }
+
+    /**
      * Resolve service form container.
      *
      * @param  string $key
-     * @param  array $parameters
+     * @param  array  $parameters
      *
      * @return mixed
      */
@@ -74,7 +87,12 @@ class Theme extends Singleton
             return $this->resolve($this->factories[$key], $parameters);
         }
 
+        // Otherwise, look for service
+        // in services collection.
         if (isset($this->services[$key])) {
+
+            // Resolve service jf we don't have
+            // a deposit for this service.
             if (! isset($this->deposit[$key])) {
                 $this->deposit[$key] = $this->resolve($this->services[$key], $parameters);
             }
@@ -86,14 +104,79 @@ class Theme extends Singleton
     }
 
     /**
-     * Resolves service with parameters.
+     * Determine if the given service exists.
      *
-     * @param  mixed $abstract
-     * @param  array  $parameters
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function has($key)
+    {
+        return isset($this->factories[$key]) || isset($this->services[$key]);
+    }
+
+    /**
+     * Removes service from the container.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function forget($key)
+    {
+        unset($this->factories[$key], $this->services[$key]);
+    }
+
+    /**
+     * Gets a service.
+     *
+     * @param string $key
+     *
      * @return mixed
      */
-    protected function resolve($abstract, array $parameters)
+    public function offsetGet($key)
     {
-         return call_user_func_array($abstract, [$this, $parameters]);
+        return $this->get($key);
+    }
+
+    /**
+     * Sets a service.
+     *
+     * @param string $key
+     * @param Closure $service
+     *
+     * @return void
+     */
+    public function offsetSet($key, $service)
+    {
+        if (! is_callable($service)) {
+            throw new BindingResolutionException("Service definition [{$service}] is not an instance of Closure");
+        }
+
+        $this->bind($key, $service);
+    }
+
+    /**
+     * Determine if the given service exists.
+     *
+     * @param  string  $key
+     *
+     * @return bool
+     */
+    public function offsetExists($key)
+    {
+        return $this->has($key);
+    }
+
+    /**
+     * Unsets a service.
+     *
+     * @param  string  $key
+     *
+     * @return void
+     */
+    public function offsetUnset($key)
+    {
+        return $this->forget($key);
     }
 }
