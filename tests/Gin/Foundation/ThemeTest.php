@@ -120,6 +120,23 @@ class ThemeTest extends TestCase
     /**
      * @test
      */
+    public function it_should_create_service_only_once_on_multiple_resolving()
+    {
+        $theme = Theme::getInstance();
+        $mock = Mockery::mock(new Stub);
+
+        $theme->bind('service', function () use ($mock) { return $mock->action(); });
+
+        $mock->shouldReceive('action')->once()->andReturn('value');
+
+        $theme->get('service');
+        $theme->get('service');
+        $theme->get('service');
+    }
+
+    /**
+     * @test
+     */
     public function it_should_throw_exception_on_resolving_nonexisting_binding()
     {
         $theme = Theme::getInstance();
@@ -127,5 +144,13 @@ class ThemeTest extends TestCase
         $this->expectException('Tonik\Gin\Foundation\Exception\BindingResolutionException');
 
         $theme->get('nonexsiting.binding');
+    }
+}
+
+class Stub
+{
+    function action()
+    {
+        //
     }
 }

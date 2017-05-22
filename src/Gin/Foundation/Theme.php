@@ -90,7 +90,6 @@ class Theme extends Singleton implements ArrayAccess
         // Otherwise, look for service
         // in services collection.
         if (isset($this->services[$key])) {
-
             // Resolve service jf we don't have
             // a deposit for this service.
             if (! isset($this->deposit[$key])) {
