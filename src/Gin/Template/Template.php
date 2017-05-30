@@ -43,7 +43,7 @@ class Template
     public function render(array $context = [])
     {
         if (locate_template($path = $this->getRelativePath(), false, false)) {
-            $this->setContext(apply_filters("tonik/gin/template/context/{$this->getFilename()}", $context));
+            $this->setContext($context);
             $this->doActions();
 
             return locate_template($path, true, false);
@@ -61,6 +61,8 @@ class Template
      */
     public function setContext(array $context)
     {
+        $context = apply_filters("tonik/gin/template/context/{$this->getFilename()}", $context);
+
         foreach ($context as $key => $value) {
             set_query_var($key, $value);
         }
