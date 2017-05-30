@@ -51,7 +51,7 @@ class Config implements ArrayAccess
             return $default;
         }
 
-        return $this->items[$key];
+        return apply_filters("tonik/gin/config/get/{$key}", $this->items[$key]);
     }
 
     /**
@@ -67,7 +67,7 @@ class Config implements ArrayAccess
         $keys = is_array($key) ? $key : [$key => $value];
 
         foreach ($keys as $key => $value) {
-            $this->items[$key] = $value;
+            $this->items[$key] = apply_filters("tonik/gin/config/set/{$key}", $value);
         }
     }
 

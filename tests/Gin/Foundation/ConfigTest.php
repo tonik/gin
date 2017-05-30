@@ -1,5 +1,6 @@
 <?php
 
+use Brain\Monkey\WP\Filters;
 use Tonik\Gin\Foundation\Config;
 
 class ConfigTest extends TestCase
@@ -17,6 +18,32 @@ class ConfigTest extends TestCase
                 'child' => 'value2'
             ]
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_apply_filters_when_getting_values()
+    {
+        $config = $this->getConfig();
+
+        Filters::expectApplied('tonik/gin/config/get/item1')->once()->with('value1')->andReturn('filtered_value');
+
+        $this->assertEquals('filtered_value', $config->get('item1'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_should_apply_filters_when_setting_values()
+    {
+        $config = $this->getConfig();
+
+        Filters::expectApplied('tonik/gin/config/set/item1')->once()->with('value')->andReturn('filtered_value');
+
+        $config->set('item1', 'value');
+
+        $this->assertEquals('filtered_value', $config->get('item1'));
     }
 
     /**
