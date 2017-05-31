@@ -108,7 +108,7 @@ class ThemeTest extends TestCase
     /**
      * @test
      */
-    public function it_should_return_same_object_on_factory_binding()
+    public function it_should_not_return_same_object_on_factory_binding()
     {
         $theme = Theme::getInstance();
 
