@@ -11,6 +11,10 @@ Some of features:
 - Readable and centralized Theme Configs
 - Enhanced [Templating](https://en.wikibooks.org/wiki/PHP_Programming/Why_Templating) with support for passing data
 
+### Documentation
+
+Comprehensive documentation is available at http://labs.tonik.pl/theme/
+
 ## Contributing
 
 Great that you are considering supporting the project. You have a lot of ways to help us grow. We appreciate all contributions, even the smallest.
