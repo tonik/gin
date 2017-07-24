@@ -2,8 +2,8 @@
 
 namespace Tonik\Gin\Foundation;
 
-use Closure;
 use ArrayAccess;
+use Closure;
 use Tonik\Gin\Foundation\Exception\BindingResolutionException;
 
 class Theme extends Singleton implements ArrayAccess
@@ -92,7 +92,7 @@ class Theme extends Singleton implements ArrayAccess
         if (isset($this->services[$key])) {
             // Resolve service jf we don't have
             // a deposit for this service.
-            if (! isset($this->deposit[$key])) {
+            if ( ! isset($this->deposit[$key])) {
                 $this->deposit[$key] = $this->resolve($this->services[$key], $parameters);
             }
 
@@ -148,7 +148,7 @@ class Theme extends Singleton implements ArrayAccess
      */
     public function offsetSet($key, $service)
     {
-        if (! is_callable($service)) {
+        if ( ! is_callable($service)) {
             throw new BindingResolutionException("Service definition [{$service}] is not an instance of Closure");
         }
 

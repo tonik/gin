@@ -3,8 +3,9 @@
 namespace Tonik\Gin\Foundation;
 
 use ArrayAccess;
+use Tonik\Gin\Contract\ConfigInterface;
 
-class Config implements ArrayAccess
+class Config implements ConfigInterface, ArrayAccess
 {
     /**
      * All of the configuration items.
