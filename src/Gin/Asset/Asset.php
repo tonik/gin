@@ -2,16 +2,15 @@
 
 namespace Tonik\Gin\Asset;
 
-use Tonik\Gin\Foundation\Config;
+use Tonik\Gin\Contract\ConfigInterface;
 use Tonik\Gin\Foundation\Exception\FileNotFoundException;
-use Tonik\Gin\Foundation\Theme;
 
 class Asset
 {
     /**
      * Theme config instance.
      *
-     * @var \Tonik\Gin\Foundation\Config
+     * @var \Tonik\Gin\Foundation\ConfigInterface
      */
     protected $config;
 
@@ -25,9 +24,9 @@ class Asset
     /**
      * Construct asset.
      *
-     * @param \Tonik\Gin\Foundation\Config $config
+     * @param \Tonik\Gin\Foundation\ConfigInterface $config
      */
-    public function __construct(Config $config)
+    public function __construct(ConfigInterface $config)
     {
         $this->config = $config;
     }

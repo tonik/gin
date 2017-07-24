@@ -2,16 +2,15 @@
 
 namespace Tonik\Gin\Template;
 
-use Tonik\Gin\Foundation\Config;
+use Tonik\Gin\Contract\ConfigInterface;
 use Tonik\Gin\Foundation\Exception\FileNotFoundException;
-use Tonik\Gin\Foundation\Theme;
 
 class Template
 {
     /**
      * Theme config instance.
      *
-     * @var array
+     * @var \Tonik\Gin\Contract\ConfigInterface
      */
     protected $config;
 
@@ -25,9 +24,9 @@ class Template
     /**
      * Construct template.
      *
-     * @param \Tonik\Gin\Foundation\Config $config
+     * @param \Tonik\Gin\Contract\ConfigInterface $config
      */
-    public function __construct(Config $config)
+    public function __construct(ConfigInterface $config)
     {
         $this->config = $config;
     }
@@ -149,13 +148,13 @@ class Template
     {
         // If file is not array, then template
         // is not named for sure.
-        if (! is_array($this->file)) {
+        if ( ! is_array($this->file)) {
             return false;
         }
 
         // Return false if template is named,
         // but name is bool or null.
-        if (isset($this->file[1]) && is_bool($this->file[1]) || is_null($this->file[1])) {
+        if (isset($this->file[1]) && is_bool($this->file[1]) || null === $this->file[1]) {
             return false;
         }
 

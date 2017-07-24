@@ -2,24 +2,24 @@
 
 namespace Tonik\Gin\Foundation;
 
+use Tonik\Gin\Contract\ConfigInterface;
 use Tonik\Gin\Foundation\Exception\FileNotFoundException;
-use Tonik\Gin\Foundation\Theme;
 
 class Autoloader
 {
     /**
      * Theme config instance.
      *
-     * @var array
+     * @var \Tonik\Gin\Contract\ConfigInterface
      */
     protected $config;
 
     /**
      * Construct autoloader.
      *
-     * @param \Tonik\Gin\Foundation\Theme $theme
+     * @param \Tonik\Gin\Contract\ConfigInterface $config
      */
-    public function __construct($config)
+    public function __construct(ConfigInterface $config)
     {
         $this->config = $config;
     }
