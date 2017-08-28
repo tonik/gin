@@ -49,7 +49,7 @@ class Autoloader
     {
         foreach ($this->config['autoload'] as $file) {
             if ( ! locate_template($this->getRelativePath($file), true, true)) {
-                throw new FileNotFoundException("Autoloaded file [{$this->getPath($file)}] cannot be found. Please, check your autoloaded entries in `config/theme.php` file.");
+                throw new FileNotFoundException("Autoloaded file [{$this->getPath($file)}] cannot be found. Please, check your autoloaded entries in `config/app.php` file.");
             }
         }
     }
