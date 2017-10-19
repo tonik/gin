@@ -41,30 +41,17 @@ class Template
      */
     public function render(array $context = [])
     {
-        if (locate_template($path = $this->getRelativePath(), false, false)) {
-            $this->setContext($context);
+        if ($template = locate_template($path = $this->getRelativePath(), false, false)) {
             $this->doActions();
 
-            return locate_template($path, true, false);
+            extract(apply_filters("tonik/gin/template/context/{$this->getFilename()}", $context));
+
+            require $template;
+
+            return;
         }
 
         throw new FileNotFoundException("Template file [{$this->getRelativePath()}] cannot be located.");
-    }
-
-    /**
-     * Sets context dataset on query.
-     *
-     * @param array $context
-     *
-     * @return void
-     */
-    public function setContext(array $context)
-    {
-        $context = apply_filters("tonik/gin/template/context/{$this->getFilename()}", $context);
-
-        foreach ($context as $key => $value) {
-            set_query_var($key, $value);
-        }
     }
 
     /**

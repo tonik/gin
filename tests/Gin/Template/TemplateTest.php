@@ -62,18 +62,21 @@ class TemplateTest extends TestCase
     {
         $config = $this->getConfig();
 
-        Functions::expect('locate_template')->atLeast()->once()->andReturn(true);
-        Functions::expect('set_query_var')->atLeast()->once()->with('key', 'changed')->andReturn(null);
+        Functions::expect('locate_template')->andReturn($this->getFixtureTemplatePath());
 
         $template = $this->getTemplate($config, 'sample_template');
         Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', null);
         Filters::expectApplied('tonik/gin/template/context/sample_template.php')->once()->with(['key' => 'value'])->andReturn(['key' => 'changed']);
+        ob_start();
         $template->render(['key' => 'value']);
+        $this->assertEquals('<div>changed</div>', $this->removeNewLineAtEOF(ob_get_clean()));
 
         $template = $this->getTemplate($config, ['sample_template', 'named']);
         Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', 'named');
         Filters::expectApplied('tonik/gin/template/context/sample_template-named.php')->once()->with(['key' => 'value'])->andReturn(['key' => 'changed']);
+        ob_start();
         $template->render(['key' => 'value']);
+        $this->assertEquals('<div>changed</div>', $this->removeNewLineAtEOF(ob_get_clean()));
     }
 
     /**
@@ -88,7 +91,7 @@ class TemplateTest extends TestCase
 
         $this->expectException(FileNotFoundException::class);
 
-        $template->render();
+        $template->render(['key' => 'value']);
     }
 
     /**
@@ -135,10 +138,12 @@ class TemplateTest extends TestCase
         $config = $this->getConfig();
         $template = $this->getTemplate($config, 'sample_template');
 
-        Functions::expect('locate_template')->twice()->andReturn(true);
+        Functions::expect('locate_template')->once()->andReturn($this->getFixtureTemplatePath());
         Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', null);
 
-        $template->render();
+        ob_start();
+        $template->render(['key' => 'value']);
+        ob_get_clean();
     }
 
     /**
@@ -148,38 +153,24 @@ class TemplateTest extends TestCase
     {
         $config = $this->getConfig();
 
+        ob_start();
+
         $template = $this->getTemplate($config, ['sample_template', 'named']);
-        Functions::expect('locate_template')->twice()->andReturn(true);
+        Functions::expect('locate_template')->once()->andReturn($this->getFixtureTemplatePath());
         Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', 'named');
-        $template->render();
+        $template->render(['key' => 'value']);
 
         $template = $this->getTemplate($config, ['sample_template', false]);
-        Functions::expect('locate_template')->twice()->andReturn(true);
+        Functions::expect('locate_template')->once()->andReturn($this->getFixtureTemplatePath());
         Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', false);
-        $template->render();
+        $template->render(['key' => 'value']);
 
         $template = $this->getTemplate($config, ['sample_template', null]);
-        Functions::expect('locate_template')->twice()->andReturn(true);
+        Functions::expect('locate_template')->once()->andReturn($this->getFixtureTemplatePath());
         Actions::expectFired('get_template_part_sample_template')->once()->with('sample_template', null);
-        $template->render();
-    }
+        $template->render(['key' => 'value']);
 
-    /**
-     * @test
-     */
-    public function it_should_set_up_context_to_the_query_var()
-    {
-        $config = $this->getConfig();
-        $template = $this->getTemplate($config, ['sample_template', 'named']);
-
-        Functions::expect('locate_template')->twice()->andReturn(true);
-        Functions::expect('set_query_var')->once()->with('key1', 'value1')->andReturn(null);
-        Functions::expect('set_query_var')->once()->with('key2', 'value2')->andReturn(null);
-
-        $template->render([
-            'key1' => 'value1',
-            'key2' => 'value2'
-        ]);
+        ob_get_clean();
     }
 
     public function getConfig()
@@ -200,5 +191,15 @@ class TemplateTest extends TestCase
     public function getTemplate($config, $name)
     {
         return (new Template($config))->setFile($name);
+    }
+
+    public function getFixtureTemplatePath()
+    {
+        return dirname(__DIR__) . '/../fixtures/template.tpl.php';
+    }
+
+    public function removeNewLineAtEOF($string)
+    {
+        return trim(preg_replace('/\s\s+/', ' ', $string));
     }
 }
