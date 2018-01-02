@@ -68,7 +68,7 @@ class Asset
     {
         $uri = $this->config['paths']['uri'];
 
-        return $uri . DIRECTORY_SEPARATOR . $this->getRelativePath();
+        return $uri . '/' . $this->getRelativePath();
     }
 
     /**
@@ -80,7 +80,7 @@ class Asset
     {
         $directory = $this->config['paths']['directory'];
 
-        return $directory . DIRECTORY_SEPARATOR . $this->getRelativePath();
+        return $directory . '/' . $this->getRelativePath();
     }
 
     /**
@@ -92,7 +92,7 @@ class Asset
     {
         $public = $this->config['directories']['public'];
 
-        return $public . DIRECTORY_SEPARATOR . $this->file;
+        return $public . '/' . $this->file;
     }
 
     /**

@@ -87,7 +87,7 @@ class Template
     {
         $directory = $this->config['paths']['directory'];
 
-        return $directory . DIRECTORY_SEPARATOR . $this->getRelativePath();
+        return $directory . '/' . $this->getRelativePath();
     }
 
     /**
@@ -101,7 +101,7 @@ class Template
 
         $extension = $this->config['templates']['extension'];
 
-        return $templates . DIRECTORY_SEPARATOR . $this->getFilename($extension);
+        return $templates . '/' . $this->getFilename($extension);
     }
 
     /**

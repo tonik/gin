@@ -65,7 +65,7 @@ class Autoloader
     {
         $file = $this->getRelativePath($file);
 
-        return $this->config['paths']['directory'] . DIRECTORY_SEPARATOR . $file;
+        return $this->config['paths']['directory'] . '/' . $file;
     }
 
     /**
@@ -77,6 +77,6 @@ class Autoloader
      */
     public function getRelativePath($file)
     {
-        return $this->config['directories']['app'] . DIRECTORY_SEPARATOR . $file;
+        return $this->config['directories']['app'] . '/' . $file;
     }
 }
