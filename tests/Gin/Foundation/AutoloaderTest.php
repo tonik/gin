@@ -16,7 +16,7 @@ class AutoloaderTest extends TestCase
         $config = $this->getConfig();
         $autoloader = $this->getAutoloader($config);
 
-        $this->assertEquals($autoloader->getRelativePath('file/to/load.php'), 'app/file/to/load.php');
+        $this->assertEquals($autoloader->getRelativePath('file/to/load.php'), 'src/file/to/load.php');
     }
 
     /**
@@ -27,7 +27,7 @@ class AutoloaderTest extends TestCase
         $config = $this->getConfig();
         $autoloader = $this->getAutoloader($config);
 
-        $this->assertEquals($autoloader->getPath('file/to/load.php'), 'abs/path/app/file/to/load.php');
+        $this->assertEquals($autoloader->getPath('file/to/load.php'), 'abs/path/src/file/to/load.php');
     }
 
     /**
@@ -40,7 +40,7 @@ class AutoloaderTest extends TestCase
 
         Functions::expect('locate_template')
             ->once()
-            ->with('app/file/to/load.php', true, true)
+            ->with('src/file/to/load.php', true, true)
             ->andReturn(false);
 
         $this->expectException(FileNotFoundException::class);
@@ -61,7 +61,7 @@ class AutoloaderTest extends TestCase
 
         Functions::expect('locate_template')
             ->once()
-            ->with('app/file/to/load.php', true, true)
+            ->with('src/file/to/load.php', true, true)
             ->andReturn(true);
 
         $autoloader->register();
@@ -74,7 +74,7 @@ class AutoloaderTest extends TestCase
                 'directory' => 'abs/path',
             ],
             'directories' => [
-                'app' => 'app'
+                'src' => 'src'
             ],
             'autoload' => [
                 'file/to/load.php',
