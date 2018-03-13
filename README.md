@@ -1,6 +1,6 @@
 # Tonik — Gin
 
-[![Build Status](https://travis-ci.org/tonik/gin.svg?branch=master)](https://travis-ci.org/tonik/gin) [![Coverage Status](https://coveralls.io/repos/github/tonik/gin/badge.svg?branch=master)](https://coveralls.io/github/tonik/gin?branch=master)
+[![Build Status](https://travis-ci.org/tonik/gin.svg?branch=develop)](https://travis-ci.org/tonik/gin) [![Coverage Status](https://coveralls.io/repos/github/tonik/gin/badge.svg?branch=develop)](https://coveralls.io/github/tonik/gin?branch=develop)
 
 ### Foundation of the [Tonik WordPress Starter Theme](https://github.com/tonik/tonik). Provides all custom functionalities which it offers.
 
