@@ -108,6 +108,10 @@ class TemplateTest extends TestCase
         $invalidNamedTemplate = $this->getTemplate($config, ['sample_template', null]);
         $this->assertFalse($invalidNamedTemplate->isNamed());
         $this->assertEquals('sample_template.php', $invalidNamedTemplate->getFilename());
+
+        $invalidNamedTemplate = $this->getTemplate($config, ['sample_template', '']);
+        $this->assertFalse($invalidNamedTemplate->isNamed());
+        $this->assertEquals('sample_template.php', $invalidNamedTemplate->getFilename());
     }
 
     /**
