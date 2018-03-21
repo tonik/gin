@@ -139,9 +139,13 @@ class Template
             return false;
         }
 
-        // Return false if template is named,
-        // but name is bool or null.
-        if (isset($this->file[1]) && is_bool($this->file[1]) || null === $this->file[1]) {
+        // Return false if template is named, but name 
+        // is invalid. A valid name should be:
+        if (
+            isset($this->file[1]) && is_bool($this->file[1]) // should be set and not be a boolean
+            || null === $this->file[1] // or null value
+            || empty($this->file[1]) // or empty sting or array
+        ) {
             return false;
         }
 
