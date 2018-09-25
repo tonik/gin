@@ -35,7 +35,7 @@ class Theme extends Singleton implements ArrayAccess
      * @param  string $key
      * @param  Closure $service
      *
-     * @return void
+     * @return Theme
      */
     public function bind($key, Closure $service)
     {
@@ -50,7 +50,7 @@ class Theme extends Singleton implements ArrayAccess
      * @param  string $key
      * @param  \Closure $factory
      *
-     * @return void
+     * @return Theme
      */
     public function factory($key, Closure $factory)
     {
@@ -71,14 +71,15 @@ class Theme extends Singleton implements ArrayAccess
         return call_user_func_array($abstract, [$this, $parameters]);
     }
 
-    /**
-     * Resolve service form container.
+	/**
+	 * Resolve service form container.
+	 *
+	 * @param  string $key
+	 * @param  array $parameters
      *
-     * @param  string $key
-     * @param  array  $parameters
-     *
-     * @return mixed
-     */
+	 * @return mixed
+     * @throws \Tonik\Gin\Foundation\Exception\BindingResolutionException
+	 */
     public function get($key, array $parameters = [])
     {
         // If service is a factory, we should always
@@ -119,7 +120,7 @@ class Theme extends Singleton implements ArrayAccess
      *
      * @param  string  $key
      *
-     * @return bool
+     * @return void
      */
     public function forget($key)
     {
@@ -132,20 +133,22 @@ class Theme extends Singleton implements ArrayAccess
      * @param string $key
      *
      * @return mixed
+     * @throws \Tonik\Gin\Foundation\Exception\BindingResolutionException
      */
     public function offsetGet($key)
     {
-        return $this->get($key);
-    }
+			return $this->get($key);
+	}
 
-    /**
-     * Sets a service.
+	/**
+	 * Sets a service.
+	 *
+	 * @param string $key
+	 * @param Closure $service
      *
-     * @param string $key
-     * @param Closure $service
-     *
-     * @return void
-     */
+	 * @return void
+     * @throws \Tonik\Gin\Foundation\Exception\BindingResolutionException
+	 */
     public function offsetSet($key, $service)
     {
         if ( ! is_callable($service)) {

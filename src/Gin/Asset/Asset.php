@@ -10,7 +10,7 @@ class Asset
     /**
      * Theme config instance.
      *
-     * @var \Tonik\Gin\Foundation\ConfigInterface
+     * @var \Tonik\Gin\Contract\ConfigInterface
      */
     protected $config;
 
@@ -24,7 +24,7 @@ class Asset
     /**
      * Construct asset.
      *
-     * @param \Tonik\Gin\Foundation\ConfigInterface $config
+     * @param \Tonik\Gin\Contract\ConfigInterface $config
      */
     public function __construct(ConfigInterface $config)
     {
@@ -35,6 +35,7 @@ class Asset
      * Get asset file URI.
      *
      * @return string
+     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
      */
     public function getUri()
     {
@@ -49,6 +50,7 @@ class Asset
      * Get asset file path.
      *
      * @return string
+     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
      */
     public function getPath()
     {

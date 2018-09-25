@@ -35,9 +35,9 @@ class Template
      * Render template.
      *
      * @param  array $context
-     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
      *
      * @return void
+     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
      */
     public function render(array $context = [])
     {
@@ -107,6 +107,8 @@ class Template
     /**
      * Gets template name.
      *
+	 * @param string $extension
+	 *
      * @return string
      */
     public function getFilename($extension = '.php')

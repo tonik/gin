@@ -4,17 +4,17 @@ namespace Tonik\Gin\Foundation;
 
 abstract class Singleton
 {
-    /**
-     * @var Singleton The reference to *Singleton* instance of this class
-     */
-    protected static $instance;
+	/**
+	 * @var self The reference to *Singleton* instance of this class
+	 */
+	protected static $instance;
 
-    /**
-     * Returns the *Singleton* instance of this class.
-     *
-     * @return Singleton The *Singleton* instance.
-     */
-    public static function getInstance()
+	/**
+	 * Returns the *Singleton* instance of this class.
+	 *
+	 * @return $this The *Singleton* instance.
+	 */
+	public static function getInstance()
     {
         if (null === static::$instance) {
             static::$instance = new static();
