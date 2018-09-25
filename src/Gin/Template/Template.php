@@ -35,9 +35,9 @@ class Template
      * Render template.
      *
      * @param  array $context
-     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
      *
      * @return void
+     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
      */
     public function render(array $context = [])
     {
@@ -72,7 +72,7 @@ class Template
         // Use first template name, if template
         // file is an array, but is not named.
         if (is_array($this->file) && isset($this->file[0])) {
-            return do_action("get_template_part_{$this->file[0]}", $this->file[0], null);
+            do_action("get_template_part_{$this->file[0]}", $this->file[0], null);
         }
 
         do_action("get_template_part_{$this->file}", $this->file, null);
@@ -104,11 +104,13 @@ class Template
         return $templates . '/' . $this->getFilename($extension);
     }
 
-    /**
-     * Gets template name.
-     *
-     * @return string
-     */
+	/**
+	 * Gets template name.
+	 *
+	 * @param string $extension
+	 *
+	 * @return string
+	 */
     public function getFilename($extension = '.php')
     {
         // If template is named,
@@ -139,7 +141,7 @@ class Template
             return false;
         }
 
-        // Return false if template is named, but name 
+        // Return false if template is named, but name
         // is invalid. A valid name should be:
         if (
             isset($this->file[1]) && is_bool($this->file[1]) // should be set and not be a boolean

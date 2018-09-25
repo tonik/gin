@@ -27,24 +27,24 @@ class Autoloader
     /**
      * Autoload registered files.
      *
-     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
-     *
      * @return void
+     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
      */
     public function register()
     {
         do_action('tonik/gin/autoloader/before_load');
 
-        $this->load();
+			$this->load();
 
-        do_action('tonik/gin/autoloader/after_load');
+		do_action('tonik/gin/autoloader/after_load');
     }
 
-    /**
-     * Localize and autoloads files.
-     *
-     * @return void
-     */
+	/**
+	 * Localize and autoloads files.
+	 *
+	 * @return void
+     * @throws \Tonik\Gin\Foundation\Exception\FileNotFoundException
+	 */
     public function load()
     {
         foreach ($this->config['autoload'] as $file) {
