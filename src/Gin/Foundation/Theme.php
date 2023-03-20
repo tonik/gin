@@ -133,7 +133,7 @@ class Theme extends Singleton implements ArrayAccess
      *
      * @return mixed
      */
-    public function offsetGet($key)
+    public function offsetGet($key): mixed
     {
         return $this->get($key);
     }
@@ -146,7 +146,7 @@ class Theme extends Singleton implements ArrayAccess
      *
      * @return void
      */
-    public function offsetSet($key, $service)
+    public function offsetSet($key, $service): void
     {
         if ( ! is_callable($service)) {
             throw new BindingResolutionException("Service definition [{$service}] is not an instance of Closure");
@@ -162,7 +162,7 @@ class Theme extends Singleton implements ArrayAccess
      *
      * @return bool
      */
-    public function offsetExists($key)
+    public function offsetExists($key): bool
     {
         return $this->has($key);
     }
@@ -174,8 +174,8 @@ class Theme extends Singleton implements ArrayAccess
      *
      * @return void
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key): void
     {
-        return $this->forget($key);
+        $this->forget($key);
     }
 }
